@@ -1,6 +1,8 @@
 import { useId, useState } from 'react';
 
-const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter}) => {
+let timeoutId = null;
+
+const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter}) => {
   const [searchText, setSearchText] = useState('');
 
   const handleSubmit = (event) => {
@@ -8,6 +10,10 @@ const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, onSearch, 
  
     //guardo toda la informacion del formulario
     const formData= new FormData(event.currentTarget);
+
+    if (event.target.name === idText) {
+      return; // si el cambio fue en el input de texto, no hago el submit completo ya que lo manejo en handleTextChange
+    }
     
     //recupero la informacion de cada campo
     const filters = {
@@ -24,8 +30,15 @@ const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, onSearch, 
   // FILTRO DE BUSQUEDA EN TIEMPO REAL AL ESCRIBIR EN EL FORMULARIO
   const handleTextChange = (event) => {
     const text = event.target.value;
-    setSearchText
-    onTextFilter(text);
+    setSearchText(text); // actualiza el input inmediatamente
+
+    // DEBOUNCE: espera a que el usuario deje de escribir por 500ms para ejecutar la busqueda, cancela el timeout anterior
+    if (timeoutId) {
+      clearTimeout(timeoutId); 
+    }
+    timeoutId = setTimeout(() => {
+      onTextFilter(text);
+    }, 500)
   }
 
   return {
@@ -46,7 +59,7 @@ export function SearchFormSection ({ onSearch, onTextFilter }) {
   const {
     handleSubmit,
     handleTextChange
-  } = useSearchForm({ idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter });
+  } = useSearchForm({ idTechnology, idLocation, idExperienceLevel, onSearch, idText, onTextFilter });
 
   
 

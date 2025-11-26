@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { Pagination } from "../components/Pagination";
 import { SearchFormSection } from "../components/SearchFormSection";
 import { JobListings } from "../components/JobListings";
-import jobsData from "../data.json";
+
+
 
 const RESULT_PER_PAGE = 5;
 
-export function SearchPage() {
+const useFilters = () => {
   // Estado para filtros multiples
   const [filters, setFilters] = useState({
       technology: '',
@@ -18,32 +19,45 @@ export function SearchPage() {
   const [textToFilter, setTextToFilter] = useState('');
 
   // Estado para el control de la paginación
-  const [ currentPage, setCurrentPage ] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // FILTRO 1: Filtrar por filtros seleccionados (por ahora solo tecnología)
-  const jobsFilteredByFilters = jobsData.filter(job => {
-    return(
-      (filters.technology === '' || job.data.technology === filters.technology) &&
-      (filters.location === '' || job.data.modalidad === filters.location) &&
-      (filters.experienceLevel === '' || job.data.nivel === filters.experienceLevel)
-    )
-  })
+  const [jobs, setJobs] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  // FILTRO 2: Filtrar por texto libre (titulo del empleo)
-  const jobsWithTextFilter = textToFilter === ''
-    ? jobsFilteredByFilters
-    : jobsFilteredByFilters.filter(job => {
-      return job.titulo.toLowerCase().includes(textToFilter.toLowerCase());
-    })
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        setLoading(true);
+
+        const params = new URLSearchParams();
+        if (textToFilter) params.append('text', textToFilter);
+        if (filters.technology) params.append('technology', filters.technology);
+        if (filters.location) params.append('type', filters.location);
+        if (filters.experienceLevel) params.append('level', filters.experienceLevel);
+
+        const offset = (currentPage - 1) * RESULT_PER_PAGE;
+        params.append('limit', RESULT_PER_PAGE);
+        params.append('offset', offset);
+
+        const queryParams = params.toString()
+        
+        const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`);
+        const json = await response.json(); 
+        setJobs(json.data);
+        setTotal(json.total);
+      } catch (error) {
+        console.log('Error fetching jobs:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchJobs();
+  }, [filters, textToFilter, currentPage]);
 
   // Genera la cantidad de páginas dependiendo de los resultados
-  const totalPages = Math.ceil(jobsWithTextFilter.length / RESULT_PER_PAGE);
-
-  // Muestra los resultados que corresponden a la pagina actual
-  const pagedResults = jobsWithTextFilter.slice(
-    (currentPage - 1) * RESULT_PER_PAGE,
-    currentPage * RESULT_PER_PAGE
-  )
+  const totalPages = Math.ceil(total / RESULT_PER_PAGE);
 
   // Maneja el cambio de página
   const handlePageChange = (page) => {
@@ -62,38 +76,46 @@ export function SearchPage() {
     setCurrentPage(1);
   }
 
-  // si no se le pasa segundo parametro, el efecto se ejecuta cada vez que se renderiza el componente
-  // si en el segundo parámetro le paso un [] se va a ejecutar la primera vez nada mas
-  // si le paso una dependencia se va a ejecutar cuando esa dependencia cambie
-  useEffect(() => {
-    document.title = `Resultados: ${jobsWithTextFilter.length} - Página ${currentPage} - DevJobs`
-  }, [jobsWithTextFilter, currentPage])
+  return {
+    loading,
+    jobs,
+    total,
+    totalPages,
+    currentPage,
+    handlePageChange,
+    handleSearch,
+    handleTextFilter
+  }
+}
 
+export function SearchPage() {
+  const {
+    jobs,
+    total,
+    loading,
+    totalPages,
+    currentPage,
+    handlePageChange,
+    handleSearch,
+    handleTextFilter
+  } = useFilters();
 
-  /* useEffect(() => {
-    // Suscripcion a un evento
-    const handleResize = () => {
-      console.log('Ventana redimensionada');
-      console.log(window.innerHeight, window.innerWidth);
-    }
-
-    window.addEventListener('resize', handleResize);
-
-    // Limpieza de suscripcion: se ejecuta antes de desmontar o antes de re-ejecutar
-    // Evita memory leak ( fuga de memoria )
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-  }, []) */
+  const title = loading 
+    ? `Cargando...` 
+    : `Resultados: ${total}, Página ${currentPage}`;
 
   return (
     <main>
+      <title>{title}</title>
       {/* SECCION DEL FORMULARIO DE BUSQUEDA */}
       <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter} />
 
       {/* SECCION DONDE SE MUESTRAN LOS RESULTADOS Y LA PAGINACION */}
       <section>
-        <JobListings jobs={pagedResults} />
+        <h2 style={{ textAlign: 'center' }}>Resultados de búsqueda</h2>
+        {
+          loading ? <p>Cargando empleos...</p> : <JobListings jobs={jobs} />
+        }
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </section>
     </main>
