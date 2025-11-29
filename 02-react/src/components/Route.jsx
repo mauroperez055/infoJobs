@@ -5,5 +5,5 @@ export function Route ({ path, component: Component }) {
 
   if (currentPath !== path) return null;
 
-  return <Component />
+  return <Component /> 
 }

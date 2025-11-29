@@ -22,7 +22,7 @@ export function Header () {
       </Link>
 
       <nav>
-        <Link href="">Inicio</Link>
+        <Link href="/">Inicio</Link>
         <Link href="/search">Empleos</Link>
         <Link href="">Empresas</Link>
         <Link href="">Salarios</Link>

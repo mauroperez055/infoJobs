@@ -145,7 +145,6 @@ nav {
       outline: none;
     }
   }
-
 }
 
 /* Botones del Header */
@@ -204,7 +203,7 @@ form > div {
   background-color: var(--input-bg);
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px var(--shadow);
-  padding: .5rem;
+  padding: 0.5rem;
   gap: 0.5rem;
 }
 
@@ -386,6 +385,34 @@ article {
     margin-top: 0.5rem;
     background: transparent;
     box-shadow: none;
+
+    .clear-filters-button {
+      padding: 0rem 1.25rem;
+      background-color: #242d3a;
+      border: 0;
+      border-radius: 0.5rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: all 0.2s;
+      appearance: none;
+      font-weight: 400;
+      height: 40px;
+      padding-top: 0; 
+      padding-bottom: 0; 
+      line-height: 40px;
+      margin-left: auto;
+
+      &:hover {
+        background-color: var(--primary-hover);
+        color: white;
+      }
+
+      &:focus {
+        outline: 2px solid #1173d4;
+        outline-offset: 2px;
+      }
+
+    }
   }
 
   form {
@@ -393,7 +420,6 @@ article {
     max-width: 1280px;
   }
 }
-
 
 /*no se si es lo correcto pero funciona*/
 #resultado h2 {
@@ -445,7 +471,6 @@ article {
   }
 }
 
-
 /*NAV cuando vamos a otra seccion*/
 .breadcrumb {
   padding: 1.2rem 1.5rem 0.3rem;
@@ -475,7 +500,7 @@ article {
 }
 
 .job-details li::before {
-  content: "✔";              /* El ícono del check */
+  content: "✔"; /* El ícono del check */
   position: absolute;
   left: 0;
   top: 0;
@@ -485,10 +510,10 @@ article {
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
-  color: #09f;              /* color del check */
+  color: #09f; /* color del check */
   background-color: transparent; /* azul tipo Tailwind */
   border-radius: 50%;
-  border: .5px solid #09f;        /* forma circular */
+  border: 0.5px solid #09f; /* forma circular */
 }
 
 .job-header {
@@ -498,7 +523,7 @@ article {
   border-bottom: none;
   padding-block: 1rem;
   background: rgba(0, 0, 0, 0.3);
-  border-radius: .5rem .5rem 0 0 ;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .job-meta h1 {
@@ -540,11 +565,12 @@ article {
   /* 🔹 Bordes */
   border-top: 1px solid transparent; /* base invisible */
   border-image: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  ) 1; /* efecto difuminado */
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    )
+    1; /* efecto difuminado */
   border-bottom: none;
   border-radius: 0 0 0.5rem 0.5rem;
 
@@ -573,4 +599,11 @@ section,
   color: var(--accent-color, #3b82f6); /* color de acento */
   text-decoration: underline;
   cursor: pointer;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

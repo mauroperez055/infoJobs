@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function useRouter() {
+  /* uso window.location.pathname para saber en que ruta estamos, es decir la ruta actual */
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
