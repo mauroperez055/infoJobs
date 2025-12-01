@@ -40,7 +40,7 @@ export const useFilters = () => {
         params.append('limit', RESULT_PER_PAGE); // resultados por pagina
         params.append('offset', offset); // desde que resultado empezar a mostrar
 
-        const queryParams = params.toString()
+        const queryParams = params.toString();
         
         const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`);
         const json = await response.json(); 
@@ -87,15 +87,27 @@ export const useFilters = () => {
     setCurrentPage(1);
   }
 
+  const hasActiveFilters = () => {
+    return (
+      textToFilter !== '' ||
+      filters.technology !== '' ||
+      filters.location !== '' ||
+      filters.experienceLevel !== ''
+    )
+  }
+
   return {
     loading,
     jobs,
     total,
     totalPages,
     currentPage,
+    filters,
+    textToFilter,
     handlePageChange,
     handleSearch,
     handleTextFilter,
-    handleClearFilters
+    handleClearFilters,
+    hasActiveFilters
   }
 }

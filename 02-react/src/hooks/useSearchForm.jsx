@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 let timeoutId = null;
 
-export const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter}) => {
+export const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter, textToFilter }) => {
   const [searchText, setSearchText] = useState('');
+
+  // sincroniza el estado local cuando se limpian los filtros desde afuera
+  useEffect(() => {
+    setSearchText(textToFilter);
+  }, [textToFilter]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

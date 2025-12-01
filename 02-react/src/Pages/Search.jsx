@@ -11,10 +11,13 @@ export function SearchPage() {
     loading,
     totalPages,
     currentPage,
+    filters,
+    textToFilter,
     handlePageChange,
     handleSearch,
     handleTextFilter,
-    handleClearFilters
+    handleClearFilters,
+    hasActiveFilters
   } = useFilters();
 
   const title = loading 
@@ -25,7 +28,14 @@ export function SearchPage() {
     <main>
       <title>{title}</title>
       {/* SECCION DEL FORMULARIO DE BUSQUEDA */}
-      <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter} handleClearFilters={handleClearFilters}/>
+      <SearchFormSection 
+        onSearch={handleSearch} 
+        onTextFilter={handleTextFilter} 
+        handleClearFilters={handleClearFilters}
+        filters={filters}
+        textToFilter={textToFilter}
+        hasActiveFilters={hasActiveFilters()}
+      />
 
       {/* SECCION DONDE SE MUESTRAN LOS RESULTADOS Y LA PAGINACION */}
       <section>

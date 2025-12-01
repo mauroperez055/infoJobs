@@ -1,18 +1,32 @@
-import { useId } from 'react';
-import { useSearchForm } from '../hooks/useSearchForm';
+import { useId } from "react";
+import { useSearchForm } from "../hooks/useSearchForm";
 
-export function SearchFormSection ({ onSearch, onTextFilter, handleClearFilters }) {
-
+export function SearchFormSection({
+  onSearch,
+  onTextFilter,
+  handleClearFilters,
+  filters,
+  textToFilter,
+  hasActiveFilters,
+}) {
   //creo ID's unicos con el hook useId
   const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
   const idExperienceLevel = useId();
 
-  const {
-    handleSubmit,
-    handleTextChange
-  } = useSearchForm({ idTechnology, idLocation, idExperienceLevel, onSearch, idText, onTextFilter });
+  const { searchText, handleSubmit, handleTextChange } = useSearchForm({
+    idTechnology,
+    idLocation,
+    idExperienceLevel,
+    onSearch,
+    idText,
+    onTextFilter,
+    filters,
+    textToFilter,
+  });
+
+  console.log('boton:', hasActiveFilters)
 
   return (
     <section className="jobs-search">
@@ -42,17 +56,21 @@ export function SearchFormSection ({ onSearch, onTextFilter, handleClearFilters 
             name={idText}
             id="job-search-input"
             type="text"
+            value={searchText}
             placeholder="Buscar empleos por título, habilidad o empresa"
-            onFocus={() => console.log('El input está activo')}
-            onBlur={() => console.log('El input perdió el foco')}
+            onFocus={() => console.log("El input está activo")}
+            onBlur={() => console.log("El input perdió el foco")}
             onChange={handleTextChange}
           />
-
         </div>
 
         {/* FILTROS */}
         <div className="search-filters">
-          <select name={idTechnology} id="filter-technology">
+          <select
+            name={idTechnology}
+            id="filter-technology"
+            value={filters.technology}
+          >
             <option value="">Tecnologías</option>
             {/* tambien se pueden agrupar con optgroup
               <optgroup label="Tenologías populares"> */}
@@ -63,22 +81,42 @@ export function SearchFormSection ({ onSearch, onTextFilter, handleClearFilters 
             <option value="react">React</option>
             <option value="node">Node.js</option>
           </select>
-          <select name={idLocation} id="filter-location">
+          <select
+            name={idLocation}
+            id="filter-location"
+            value={filters.location}
+          >
             <option value="">Ubicación</option>
             <option value="remoto">Remoto</option>
-            <option value="buenos aires">Buenos Aires</option>
-            <option value="cordoba">Córdoba</option>
-            <option value="rosario">Rosario</option>
+            <option value="cdmx">Ciudad de México</option>
+            <option value="guadalajara">Guadalajara</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="bsas">Buenos Aires</option>
+            <option value="madrid">Madrid</option>
+            <option value="bogota">Bogotá</option>
           </select>
-          <select name={idExperienceLevel} id="filter-nivel">
+          <select
+            name={idExperienceLevel}
+            id="filter-nivel"
+            value={filters.experienceLevel}
+          >
             <option value="">Nivel de experiencia</option>
             <option value="junior">Junior</option>
             <option value="mid-level">Mid-level</option>
             <option value="senior">Senior</option>
             <option value="lead">Lead</option>
           </select>
-          
-          <button className="clear-filters-button" type='button' onClick={handleClearFilters}>Limpiar filtros</button>
+
+          {/* Botón condicional, solo se muestra cuando hay filtros activos */}
+          {hasActiveFilters && (
+            <button
+              className="clear-filters-button"
+              type="button"
+              onClick={handleClearFilters}
+            >
+              Limpiar filtros
+            </button>
+          )}
         </div>
       </form>
 
@@ -86,5 +124,5 @@ export function SearchFormSection ({ onSearch, onTextFilter, handleClearFilters 
       <span id="filter-selected-value"></span>
       <span id="cantidad-resultados"></span>
     </section>
-  )
+  );
 }
