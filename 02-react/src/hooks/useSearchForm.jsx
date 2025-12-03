@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-
-let timeoutId = null;
+import { useEffect, useState, useRef } from "react";
 
 export const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter, textToFilter }) => {
+  const timeoutId =  useRef(null); // uso useRef para mantener un valor entre renders sin causar re-renderizados
   const [searchText, setSearchText] = useState('');
 
   // sincroniza el estado local cuando se limpian los filtros desde afuera
@@ -38,10 +37,10 @@ export const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, idT
     setSearchText(text); // actualiza el input inmediatamente
 
     // DEBOUNCE: espera a que el usuario deje de escribir por 500ms para ejecutar la busqueda, cancela el timeout anterior
-    if (timeoutId) {
-      clearTimeout(timeoutId); 
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current); 
     }
-    timeoutId = setTimeout(() => {
+    timeoutId.current = setTimeout(() => {
       onTextFilter(text);
     }, 500)
   }

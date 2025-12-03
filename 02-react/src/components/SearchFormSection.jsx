@@ -9,6 +9,7 @@ export function SearchFormSection({
   textToFilter,
   hasActiveFilters,
 }) {
+
   //creo ID's unicos con el hook useId
   const idText = useId();
   const idTechnology = useId();
@@ -25,8 +26,6 @@ export function SearchFormSection({
     filters,
     textToFilter,
   });
-
-  console.log('boton:', hasActiveFilters)
 
   return (
     <section className="jobs-search">
@@ -61,6 +60,7 @@ export function SearchFormSection({
             onFocus={() => console.log("El input está activo")}
             onBlur={() => console.log("El input perdió el foco")}
             onChange={handleTextChange}
+            defaultValue={textToFilter}
           />
         </div>
 
