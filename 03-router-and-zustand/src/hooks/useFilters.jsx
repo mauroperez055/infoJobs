@@ -1,37 +1,32 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "./useRouter";
+import { useSearchParams } from "react-router-dom";
 
 const RESULT_PER_PAGE = 5;
 
 export const useFilters = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   // Estado para filtros multiples
   const [filters, setFilters] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
     return {
-      technology: params.get('technology') || '',
-      location: params.get('type') || '',
-      experienceLevel: params.get('level') || ''
+      technology: searchParams.get('technology') || '',
+      location: searchParams.get('type') || '',
+      experienceLevel: searchParams.get('level') || ''
     }
   });
 
   // Estado para filtro por texto libre (buscador) 
-  const [textToFilter, setTextToFilter] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('text') || '';
-  })
+  const [textToFilter, setTextToFilter] = useState(() => searchParams.get('text') || '');
 
   // Estado para el control de la paginación
   const [currentPage, setCurrentPage] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    const page = Number(params.get('page'));
+    const page = Number(searchParams.get('page'));
     return Number.isNaN(page) ? page : 1;
   });
 
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const { navigateTo } = useRouter();
 
   // Efecto para llamar a la APi y obtener los trabajos cada vez que cambian los filtros, el texto o la página actual
   useEffect(() => {
@@ -71,22 +66,17 @@ export const useFilters = () => {
 
   // Efecto para actualizar la URL en la barra de direcciones cuando cambian los filtros, el texto o la página actual
   useEffect(() => {
-    const params = new URLSearchParams();
-
-    if (textToFilter) params.append('text', textToFilter);
-    if (filters.technology) params.append('technology', filters.technology);
-    if (filters.location) params.append('type', filters.location);
-    if (filters.experienceLevel) params.append('level', filters.experienceLevel);
-
-    if (currentPage > 1) params.append('page', currentPage);
-
-    const newUrl = params.toString()
-      ? `${window.location.pathname}?${params.toString()}`
-      : window.location.pathname;
-
-    navigateTo(newUrl);
-
-  }, [filters, currentPage, textToFilter, navigateTo])
+    setSearchParams((params) => {
+      if (textToFilter) params.set('text', textToFilter);
+      if (filters.technology) params.set('technology', filters.technology);
+      if (filters.location) params.set('type', filters.location);
+      if (filters.experienceLevel) params.set('level', filters.experienceLevel);
+  
+      if (currentPage > 1) params.set('page', currentPage);
+  
+      return params;
+    })
+  }, [filters, currentPage, textToFilter, setSearchParams])
 
   // Genera la cantidad de páginas dependiendo de los resultados
   const totalPages = Math.ceil(total / RESULT_PER_PAGE);

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import { Link } from "./Link";
 
 export function Header () {
@@ -22,10 +23,21 @@ export function Header () {
       </Link>
 
       <nav>
-        <Link href="/">Inicio</Link>
-        <Link href="/search">Empleos</Link>
-        <Link href="">Empresas</Link>
-        <Link href="">Salarios</Link>
+        {/**
+         * NavLink nos permite detectar si el componente esta "activo"
+         * segun la ruta en la que esté y asi poder aplicar estilos segun
+         */}
+        <NavLink
+          className={({ isActive }) => isActive ? 'nav-link-active' : ''} 
+          to="/">
+            Inicio
+        </NavLink>
+        <NavLink 
+          className={({ isActive }) => isActive ? 'nav-link-active' : ''}
+          to="/search">
+            Empleos
+        </NavLink>
+        
       </nav>
 
     </header>

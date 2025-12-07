@@ -1,0 +1,168 @@
+/* pages/JobDetail.module.css */
+.container {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  max-width: 64rem;
+}
+
+.loading,
+.error {
+  padding-block: 5rem;
+  text-align: center;
+}
+
+.loadingText {
+  color: var(--text-muted);
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.errorButton {
+  color: #09f;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.errorButton:hover {
+  text-decoration: underline;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbButton {
+  background: none;
+  border: none;
+  color: #09f;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumbButton:hover {
+  color: #0088e6;
+  text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+  margin: 0 0.5rem;
+  color: var(--text-muted);
+}
+
+.breadcrumbCurrent {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Header section */
+.header {
+  display: flex;
+  justify-content: space-between; /* texto izquierda, botón derecha */
+  align-items: center;            /* misma altura */
+  margin-bottom: 2rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.metaText {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.applyButton {
+  background: #09f;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+
+.applyButton:hover {
+  background: #0088e6;
+}
+
+.applyButton:disabled {
+  background: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.applyButton:disabled:hover {
+  background: #666;
+}
+
+@media (min-width: 640px) {
+  .applyButton {
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+/* Job sections */
+.section {
+  margin-bottom: 2.5rem;
+  background: transparent;
+  padding: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.sectionContent {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* Estilos para listas dentro del contenido markdown */
+.sectionContent ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.sectionContent p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.sectionContent strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
