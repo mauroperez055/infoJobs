@@ -1,37 +1,45 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { Spinner } from "../components/Spinner";
-import snarkdown from "snarkdown";
+
 import styles from './Detail.module.css'
+import { JobSection } from "../components/JobSection";
 
 
-// Componente para mostrar cada una de las secciones de la pagina
-function JobSection ({ title, content }) {
-  /**
-   * snarkdown es una dependencia que conviernte markdown en html
-   * pero no va renderizar de manera correcta por protocolo de seguridad,
-   * por lo tanto utilizamos dangerouslyInnerHTML
-   */
-  const html = snarkdown(content);
+function DetailPageBreadCrumb ({ job }) {
+  return (
+    <div className={styles.container}>
+      <nav className={styles.breadcrumb}>
+        <Link
+          to="/search"
+          className={styles.breadcrumbButton}
+        >
+          Empleos
+        </Link>
+        <span className={styles.breadcrumbSeparator}>/</span>
+        <span className={styles.breadcrumbCurrent}>{job.titulo}</span>
+      </nav>  
+    </div>
+  )
+}
 
-  return(
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>
-        {title}
-      </h2>
-
-      {/**
-       * para poder renderizar correctamente el html lo inyectamos de manera "peligrosa" con 'dangerouslyInnerHTML'
-       * Hay que estar seguros que el html viene de un sitio confiable"
-      */}
-      <div 
-        className={`${styles.sectionContent} prose`} 
-        dangerouslySetInnerHTML={{
-          __html: html
-        }} 
-      />
-
-    </section>
+function DetailPageHeader ({ job, isLoggedIn }) {
+  return (
+    <>
+      <header className={styles.header}>
+        <div className={styles.info}>
+          <h1 className={styles.title}>
+            {job.titulo}
+          </h1>
+          <p className={styles.metaText}>
+            {job.empresa} | {job.ubicacion}
+          </p>  
+        </div>
+        <button disabled={!isLoggedIn} className={styles.applyButton}>
+          {isLoggedIn ? 'Aplicar ahora' : 'Iniciar sesión para aplicar'}
+        </button>
+      </header>
+    </>
   )
 }
 
@@ -40,7 +48,7 @@ function JobSection ({ title, content }) {
  * Autor: Perez Mauro
  */
 
-export default function JobDetails() {
+export default function JobDetails({ isLoggedIn }) {
   const { id } = useParams(); // recupera los parametros de la URL, en este caso el id
   const navigate = useNavigate();
 
@@ -79,10 +87,10 @@ export default function JobDetails() {
             Oferta no encontrada
           </h2>
           <button 
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/search')}
             className={styles.errorButton}
           >
-            Volver al inicio
+            Volver a la lista de empleos
           </button>
         </div>
       </div>
@@ -91,32 +99,8 @@ export default function JobDetails() {
 
   return (
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
-      <div className={styles.container}>
-        <nav className={styles.breadcrumb}>
-          <Link
-            to="/search"
-            className={styles.breadcrumbButton}
-          >
-            Empleos
-          </Link>
-          <span className={styles.breadcrumbSeparator}>/</span>
-          <span className={styles.breadcrumbCurrent}>{job.titulo}</span>
-        </nav>  
-      </div>
-
-      <header className={styles.header}>
-        <div className={styles.info}>
-          <h1 className={styles.title}>
-            {job.titulo}
-          </h1>
-          <p className={styles.metaText}>
-            {job.empresa} | {job.ubicacion}
-          </p>  
-        </div>
-        <button className={styles.applyButton}>
-          Aplicar ahora
-        </button>
-      </header>
+      <DetailPageBreadCrumb job={job}/>
+      <DetailPageHeader job={job} isLoggedIn={isLoggedIn} />
 
       <JobSection title="Descripción del puesto" content={job.content.description} />
       <JobSection title="Responsabilidades" content={job.content.responsibilities} />

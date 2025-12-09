@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Routes, Route } from 'react-router';
 
 import { Header } from './components/Header';
@@ -15,12 +15,20 @@ const SearchPage = lazy(() => import('./Pages/Search.jsx'));
 const JobDetails = lazy(() => import('./Pages/Details.jsx'));
 const NotFoundPage = lazy(() => import('./Pages/404.jsx'));
 
-
-
 function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  }
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+  }
+
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} onLogin={handleLogin} onLogout={handleLogout} />
       {/**
        * con Suspense mejor la experiencia del usuario
        * mostrando un fallback hasta que cargue la pagina completa
@@ -30,8 +38,11 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/jobs/:id" element={<JobDetails />} />
-          <Route path="*" element={<NotFoundPage />} />
+          {/* le paso isLogged a JobDetails porque
+            solo los usarios que han iniciado sesion 
+            pueden ver los detalles */}
+          <Route path="/jobs/:id" element={<JobDetails isLoggedIn={isLoggedIn}/>} />
+          <Route path="*" element={<NotFoundPage />} /> {/* siempre debe ir al final */}
         </Routes>
       </Suspense>
       <Footer />
