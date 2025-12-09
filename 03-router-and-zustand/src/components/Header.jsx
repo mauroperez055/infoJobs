@@ -42,8 +42,8 @@ export function Header ({ isLoggedIn, onLogin, onLogout }) {
 
       {
         isLoggedIn
-          ? <button onClick={onLogout}>Cerrar sesión</button>
-          : <button onClick={onLogin}>Iniciar sesión</button>
+          ? <button onClick={onLogout} className="button-apply-job">Cerrar sesión</button>
+          : <button onClick={onLogin} className="button-apply-job">Iniciar sesión</button>
       }
 
     </header>

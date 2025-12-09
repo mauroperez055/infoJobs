@@ -2,6 +2,12 @@ import { useState } from "react";
 import { Link } from "./Link";
 import styles from "./JobCard.module.css";
 
+/**
+ * Componente que muestra la información general de cada oferta,
+ * un boton para Aplicar y un link de "Ver detalles" para acceder 
+ * a la oferta completa.
+ */
+
 export function JobCard({ job }) {
   const [isApplied, setIsApplied] = useState(false);
 
@@ -37,20 +43,3 @@ export function JobCard({ job }) {
     </article>
   )
 }
-
-/*export function JobCard ({ data }) {
-  return (
-    <>
-      {data.map((job) => 
-        <article className="jobs-listing">
-          <h3>{job.titulo}</h3>
-          <small>
-            {job.empresa} | {job.ubicacion}
-          </small>
-          <p>{job.descripcion}</p>
-          <button className="button-apply-job">Aplicar</button>
-        </article>
-      )}
-    </>
-  )
-} */

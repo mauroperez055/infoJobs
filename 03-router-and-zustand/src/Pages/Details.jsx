@@ -1,51 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { Spinner } from "../components/Spinner";
 
+import { Spinner } from "../components/Spinner";
 import styles from './Detail.module.css'
 import { JobSection } from "../components/JobSection";
+import { DetailPageBreadCrumb } from "../components/DetailPageBreadCrumb";
+import { DetailPageHeader } from "../components/DetailPageHeader";
 
-
-function DetailPageBreadCrumb ({ job }) {
-  return (
-    <div className={styles.container}>
-      <nav className={styles.breadcrumb}>
-        <Link
-          to="/search"
-          className={styles.breadcrumbButton}
-        >
-          Empleos
-        </Link>
-        <span className={styles.breadcrumbSeparator}>/</span>
-        <span className={styles.breadcrumbCurrent}>{job.titulo}</span>
-      </nav>  
-    </div>
-  )
-}
-
-function DetailPageHeader ({ job, isLoggedIn }) {
-  return (
-    <>
-      <header className={styles.header}>
-        <div className={styles.info}>
-          <h1 className={styles.title}>
-            {job.titulo}
-          </h1>
-          <p className={styles.metaText}>
-            {job.empresa} | {job.ubicacion}
-          </p>  
-        </div>
-        <button disabled={!isLoggedIn} className={styles.applyButton}>
-          {isLoggedIn ? 'Aplicar ahora' : 'Iniciar sesión para aplicar'}
-        </button>
-      </header>
-    </>
-  )
-}
 
 /**
  * Componente que muestra los detalles de cada oferta de trabajo
- * Autor: Perez Mauro
  */
 
 export default function JobDetails({ isLoggedIn }) {
