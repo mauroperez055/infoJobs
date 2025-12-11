@@ -1,4 +1,5 @@
 import styles from '../Pages/Detail.module.css';
+import { useAuth } from '../context/AuthContext';
 
 /**
  * Componente que muestra el header de cualquier 
@@ -7,7 +8,9 @@ import styles from '../Pages/Detail.module.css';
  * boton para Aplicar a la oferta
  */
 
-export function DetailPageHeader ({ job, isLoggedIn }) {
+export function DetailPageHeader ({ job }) {
+  const { isLoggedIn } = useAuth();
+
   return (
     <>
       <header className={styles.header}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router";
+import { useParams, useNavigate  } from "react-router";
 
 import { Spinner } from "../components/Spinner";
 import styles from './Detail.module.css'
@@ -12,7 +12,7 @@ import { DetailPageHeader } from "../components/DetailPageHeader";
  * Componente que muestra los detalles de cada oferta de trabajo
  */
 
-export default function JobDetails({ isLoggedIn }) {
+export default function JobDetails() {
   const { id } = useParams(); // recupera los parametros de la URL, en este caso el id
   const navigate = useNavigate();
 
@@ -64,7 +64,7 @@ export default function JobDetails({ isLoggedIn }) {
   return (
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
       <DetailPageBreadCrumb job={job}/>
-      <DetailPageHeader job={job} isLoggedIn={isLoggedIn} />
+      <DetailPageHeader job={job} />
 
       <div className="section-details">
         <JobSection title="Descripción del puesto" content={job.content.description} />

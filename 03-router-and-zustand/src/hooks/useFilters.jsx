@@ -94,7 +94,7 @@ export const useFilters = () => {
         params.delete('level')
       }
   
-      if (currentPage > 1) params.set('page', currentPage);
+      if (currentPage >= 1) params.set('page', currentPage);
   
       return params;
     })
