@@ -6,7 +6,7 @@ import { Footer } from './components/Footer';
 
 /**
  * Con lazy cargamos de forma "perezoza" las paginas, 
- * asi evitamos cargar todo sin que lo necesitemos
+ * es decir solo cuando las necesitamos.
  * 
  * NOTA: para poder usarlo hay que exportar los componentes por defecto (export default)
  */

@@ -131,9 +131,9 @@
 
 /* Job sections */
 .section {
-  margin-bottom: 2.5rem;
-  background: transparent;
+  background: #0a172d;
   padding: 2rem;
+  margin-bottom: 1rem;
 }
 
 .sectionTitle {
@@ -146,7 +146,7 @@
 .sectionContent {
   color: var(--text-secondary);
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 /* Estilos para listas dentro del contenido markdown */

@@ -66,10 +66,12 @@ export default function JobDetails({ isLoggedIn }) {
       <DetailPageBreadCrumb job={job}/>
       <DetailPageHeader job={job} isLoggedIn={isLoggedIn} />
 
-      <JobSection title="Descripción del puesto" content={job.content.description} />
-      <JobSection title="Responsabilidades" content={job.content.responsibilities} />
-      <JobSection title="Requisitos" content={job.content.requirements} />
-      <JobSection title="Acerca de la empresa" content={job.content.about} />
+      <div className="section-details">
+        <JobSection title="Descripción del puesto" content={job.content.description} />
+        <JobSection title="Responsabilidades" content={job.content.responsibilities} />
+        <JobSection title="Requisitos" content={job.content.requirements} />
+        <JobSection title="Acerca de la empresa" content={job.content.about} />
+      </div>
     </div>
   )
 }

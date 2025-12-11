@@ -10,7 +10,7 @@ import { Link } from './Link';
 export function DetailPageBreadCrumb ({ job }) {
   return (
     <div className={styles.container}>
-      <nav className={styles.breadcrumb}>
+      <nav className={styles.breadcrumb} aria-label='Ruta de navegación'>
         <Link
           to="/search"
           className={styles.breadcrumbButton}
@@ -18,7 +18,7 @@ export function DetailPageBreadCrumb ({ job }) {
           Empleos
         </Link>
         <span className={styles.breadcrumbSeparator}>/</span>
-        <span className={styles.breadcrumbCurrent}>{job.titulo}</span>
+        <span className={styles.breadcrumbCurrent} aria-current='page'>{job.titulo}</span>
       </nav>  
     </div>
   )

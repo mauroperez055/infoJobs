@@ -25,7 +25,7 @@ export function Header ({ isLoggedIn, onLogin, onLogout }) {
       <nav>
         {/**
          * NavLink nos permite detectar si el componente esta "activo"
-         * segun la ruta en la que esté y asi poder aplicar estilos segun
+         * segun la ruta en la que esté y asi poder aplicar estilos.
          */}
         <NavLink
           className={({ isActive }) => isActive ? 'nav-link-active' : ''} 

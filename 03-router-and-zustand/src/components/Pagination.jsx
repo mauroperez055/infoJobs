@@ -41,7 +41,8 @@ export function Pagination ({ currentPage = 1, totalPages = 10, onPageChange }) 
   }
 
   return (
-    <nav className={styles.pagination}>
+    <nav className={styles.pagination} aria-label='Paginación de resultados'>
+
       <a href={buildPageUrl(currentPage - 1)} style={stylePrevButton} onClick={handlePrevClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
+/**
+ * Componente que crea e inicializa los filtros con la url,
+ * realiza la llamada a la API,
+ * crea y actualiza la url con los filtros.
+ */
+
 const RESULT_PER_PAGE = 5;
 
 export const useFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Estado para filtros multiples
+  // Estado para filtros multiples de los selects
   const [filters, setFilters] = useState(() => {
     return {
       technology: searchParams.get('technology') || '',
@@ -67,10 +73,26 @@ export const useFilters = () => {
   // Efecto para actualizar la URL en la barra de direcciones cuando cambian los filtros, el texto o la página actual
   useEffect(() => {
     setSearchParams((params) => {
-      if (textToFilter) params.set('text', textToFilter);
-      if (filters.technology) params.set('technology', filters.technology);
-      if (filters.location) params.set('type', filters.location);
-      if (filters.experienceLevel) params.set('level', filters.experienceLevel);
+      if (textToFilter) { 
+        params.set('text', textToFilter)
+      } else {
+        params.delete('text')
+      }
+      if (filters.technology) {
+        params.set('technology', filters.technology)
+      } else {
+        params.delete('technology')
+      }
+      if (filters.location) {
+        params.set('type', filters.location)
+      } else {
+        params.delete('type')
+      }
+      if (filters.experienceLevel) {
+        params.set('level', filters.experienceLevel)
+      } else {
+        params.delete('level')
+      }
   
       if (currentPage > 1) params.set('page', currentPage);
   

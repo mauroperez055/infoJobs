@@ -130,8 +130,9 @@ header {
 /* Navegación del header a otras páginas */
 nav {
   align-items: center;
-  gap: 1rem;
+  gap: 1rem;    
   display: flex;
+  user-select: none;
 
   a {
     text-decoration: none;
@@ -139,8 +140,7 @@ nav {
     transition: color 0.2s;
     font-weight: 500;
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--primary);
       outline: none;
     }
@@ -654,4 +654,5 @@ section,
   color: #09f;
   pointer-events: none;
   opacity: 0.5;
+ 
 }
