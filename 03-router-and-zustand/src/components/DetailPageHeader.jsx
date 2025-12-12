@@ -1,5 +1,6 @@
 import styles from '../Pages/Detail.module.css';
-import { useAuth } from '../context/AuthContext';
+import { useAuthStore } from '../store/authStore';
+import { useFavoriteStore } from '../store/favoriteStore';
 
 /**
  * Componente que muestra el header de cualquier 
@@ -8,8 +9,30 @@ import { useAuth } from '../context/AuthContext';
  * boton para Aplicar a la oferta
  */
 
-export function DetailPageHeader ({ job }) {
-  const { isLoggedIn } = useAuth();
+function DetailApplyButton () {
+  const { isLoggedIn } = useAuthStore();
+
+  return (
+    <button disabled={!isLoggedIn} className='button-apply-job'>
+      {isLoggedIn ? 'Aplicar ahora' : 'Iniciar sesión para aplicar'}
+    </button>
+  )
+}
+
+function DetailFavoriteButton ({ id }) {
+  const { isFavorite, toggleFavorite } = useFavoriteStore();
+
+  return (
+    <button 
+      onClick={() => toggleFavorite(id)}
+      aria-label={isFavorite(id) ? 'Remove from favorites' : 'Add to favorites'}
+    >
+      {isFavorite(id) ? '❤️' : '🤍'}
+    </button>
+  )
+}
+
+export function DetailPageHeader ({ job }) { 
 
   return (
     <>
@@ -18,14 +41,13 @@ export function DetailPageHeader ({ job }) {
           <h1 className={styles.title}>
             {job.titulo}
           </h1>
+        </div>
           <p className={styles.metaText}>
             {job.empresa} | {job.ubicacion}
           </p>  
-        </div>
-        <button disabled={!isLoggedIn} className='button-apply-job'>
-          {isLoggedIn ? 'Aplicar ahora' : 'Iniciar sesión para aplicar'}
-        </button>
       </header>
+        <DetailApplyButton />
+        <DetailFavoriteButton id={job.id}/>
     </>
   )
 }

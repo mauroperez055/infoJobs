@@ -1,11 +1,16 @@
 import { NavLink } from "react-router";
-import { useAuth } from "../context/AuthContext";
 import { Link } from "./Link";
+import { useAuthStore } from "../store/authStore";
+import { useFavoriteStore } from "../store/favoriteStore";
 
 export function Header () {
+  const { isLoggedIn } = useAuthStore();
+  const { countFavorites } = useFavoriteStore();
+
+  const numberOfFavorites = countFavorites();
 
   const HeaderUserButton = () => {
-    const { isLoggedIn, login, logout } = useAuth();
+    const { isLoggedIn, login, logout } = useAuthStore();
 
     return isLoggedIn
       ? <button onClick={logout} className="button-apply-job">Cerrar sesión</button>
@@ -47,6 +52,14 @@ export function Header () {
             to="/search">
               Empleos
           </NavLink>
+          {
+            isLoggedIn && (
+              <NavLink className={({ isActive }) => isActive ? 'nav-link-active' : ''}
+              to="/profile">
+                Profile ❤️ ({numberOfFavorites})
+              </NavLink>
+            )
+          }
           
         </nav>
 

@@ -1,6 +1,10 @@
 import { createContext, use, useState } from "react";
 
 /**
+ * CONTEXT API
+ */
+
+/**
  * "use" tambien sirve para leer contexto como useContext, 
  * ademas sirve para leer promesas
  */
