@@ -73,7 +73,7 @@
 .header {
   display: flex;
   justify-content: space-between; /* texto izquierda, botón derecha */
-  align-items: center;            /* misma altura */
+  align-items: start;            /* misma altura */
   margin-bottom: 2rem;
 }
 
@@ -165,4 +165,12 @@
 .sectionContent strong {
   font-weight: 600;
   color: var(--text-primary);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  text-align: center;
+  align-items: start;
 }

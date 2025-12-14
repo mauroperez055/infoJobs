@@ -6,8 +6,8 @@ import { useAuthStore } from "../store/authStore";
 
 /**
  * Componente que muestra la información general de cada oferta,
- * un boton para Aplicar y un link de "Ver detalles" para acceder 
- * a la oferta completa.
+ * un boton para Aplicar, un link de "Ver detalles" para acceder 
+ * a la oferta completa y un boton de "Favoritos".
  */
 
 function JobCardFavoriteButton ({ id }) {
@@ -26,7 +26,7 @@ function JobCardFavoriteButton ({ id }) {
   )
 }
 
-function JobCardApplyButton ({ jobId }) {
+function JobCardApplyButton ({ id }) {
   const [isApplied, setIsApplied] = useState(false);
   const { isLoggedIn } = useAuthStore(); 
 
@@ -34,7 +34,7 @@ function JobCardApplyButton ({ jobId }) {
   const buttonText = isApplied ? 'Aplicaste!' : 'Aplicar';
 
   const handleApplyClick = () => {
-    console.log('Aplicando al trabajo con id: ', jobId);
+    console.log('Aplicando al trabajo con id: ', id);
     setIsApplied(true);
   }
 

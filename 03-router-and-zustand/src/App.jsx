@@ -25,10 +25,6 @@ function App() {
   return (
     <>
       <Header />
-      {/**
-       * con Suspense mejor la experiencia del usuario
-       * mostrando un fallback hasta que cargue la pagina completa
-       */}
       <Suspense fallback={<div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}
       >Cargando...</div>}>
         <Routes>

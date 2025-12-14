@@ -20,10 +20,12 @@ function DetailApplyButton () {
 }
 
 function DetailFavoriteButton ({ id }) {
+  const { isLoggedIn } = useAuthStore();
   const { isFavorite, toggleFavorite } = useFavoriteStore();
 
   return (
-    <button 
+    <button
+      disabled={!isLoggedIn} 
       onClick={() => toggleFavorite(id)}
       aria-label={isFavorite(id) ? 'Remove from favorites' : 'Add to favorites'}
     >
@@ -41,13 +43,15 @@ export function DetailPageHeader ({ job }) {
           <h1 className={styles.title}>
             {job.titulo}
           </h1>
-        </div>
           <p className={styles.metaText}>
             {job.empresa} | {job.ubicacion}
-          </p>  
+          </p>
+        </div>
+        <div className={styles.buttons}>
+          <DetailApplyButton />
+          <DetailFavoriteButton id={job.id}/>
+        </div>  
       </header>
-        <DetailApplyButton />
-        <DetailFavoriteButton id={job.id}/>
     </>
   )
 }
