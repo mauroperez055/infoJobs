@@ -35,49 +35,44 @@ export default function Register() {
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="name" className={styles.label}>
-              Nombre completo
-            </label>
-            <input
-              id={nameId}
-              name={nameId}
-              type="text"
-              className={styles.input}
-              placeholder="Juan Pérez"
-              required
-            />
-          </div>  
-          <div className={styles.formGroup}>
-            <label htmlFor={emailId} className={styles.label}>
-              Email
-            </label>
-            <input
-              id={emailId}
-              name={emailId}
-              type="email"
-              className={styles.input}
-              placeholder="tu@email.com"
-              required
-            />
-          </div>
+          <input
+            id={nameId}
+            type="name"
+            name={nameId}
+            className={styles.inputName}
+            placeholder="Nombre completo"
+            required
+          />
+        
+          <input
+            id={emailId}
+            name={emailId}
+            type="email"
+            className={styles.inputEmail}
+            placeholder="Email"
+            required
+          />
 
-          <div className={styles.formGroup}>
-            <label htmlFor="password" className={styles.label}>
-              Contraseña
-            </label>
-            <input
-              id={passwordId}
-              name={passwordId}
-              type="password"
-              className={styles.input}
-              placeholder="••••••••"
-              required
-            />
-          </div>
+          <input
+            id={passwordId}
+            name={passwordId}
+            type="password"
+            className={styles.inputPass}
+            placeholder="Contraseña"
+            required
+          />
 
+          <input
+            id={passwordId}
+            name={passwordId}
+            type="password"
+            className={styles.inputPass}
+            placeholder="Repetir contraseña"
+            required
+          />
+          
           <button type="submit" className={styles.submitButton}>
-            Crear Cuenta
+            Crear cuenta
           </button>
         </form>
 

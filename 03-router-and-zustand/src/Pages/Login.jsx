@@ -32,34 +32,30 @@ export default function Login() {
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor={emailId} className={styles.label}>
-              Email
-            </label>
-            <input
-              id={emailId}
-              type="email"
-              name={emailId}
-              className={styles.input}
-              placeholder="tu@email.com"
-              required
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor={passwordId} className={styles.label}>
-              Contraseña
-            </label>
-            <input
-              id={passwordId}
-              name={passwordId}
-              type="password"
-              className={styles.input}
-              placeholder="••••••••"
-              required
-            />
-          </div>
-
+          {/* <label htmlFor={emailId} className={styles.label}>
+            Email
+          </label> */}
+          <input
+            id={emailId}
+            type="email"
+            name={emailId}
+            className={styles.inputEmail}
+            placeholder="Email"
+            required
+          />
+          
+          {/* <label htmlFor={passwordId} className={styles.label}>
+            Contraseña
+          </label> */}
+          <input
+            id={passwordId}
+            name={passwordId}
+            type="password"
+            className={styles.inputPass}
+            placeholder="Password"
+            required
+          />
+          
           <button type="submit" className={styles.submitButton}>
             Iniciar Sesión
           </button>

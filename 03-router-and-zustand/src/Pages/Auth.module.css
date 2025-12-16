@@ -4,9 +4,13 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
+  flex-direction: column;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: rgba(25, 25, 35, 0.8);
   border-radius: 1rem;
   padding: 2.5rem;
@@ -35,19 +39,15 @@
   gap: 1.5rem;
 }
 
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
 .label {
   color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 500;
+  text-align: start;
+  margin-left: 0.5rem;
 }
 
-.input {
+.inputEmail {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.5rem;
@@ -55,6 +55,35 @@
   color: var(--text-primary);
   font-size: 1rem;
   transition: all 0.2s;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+.inputPass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.2s;
+  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20class%3D%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-lock%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M5%2013a2%202%200%200%201%202%20-2h10a2%202%200%200%201%202%202v6a2%202%200%200%201%20-2%202h-10a2%202%200%200%201%20-2%20-2v-6z%22%20%2F%3E%3Cpath%20d%3D%22M11%2016a1%201%200%201%200%202%200a1%201%200%200%200%20-2%200%22%20%2F%3E%3Cpath%20d%3D%22M8%2011v-4a4%204%200%201%201%208%200v4%22%20%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+.inputName {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.2s;
+  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20class%3D%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-user%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M8%207a4%204%200%201%200%208%200a4%204%200%200%200%20-8%200%22%20%2F%3E%3Cpath%20d%3D%22M6%2021v-2a4%204%200%200%201%204%20-4h4a4%204%200%200%201%204%204v2%22%20%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
 }
 
 .input:focus {
