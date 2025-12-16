@@ -56,6 +56,9 @@ export default function Login() {
             required
           />
           
+          {/**
+           * Navega automaticamente despues del submit a /search
+           */}
           <button type="submit" className={styles.submitButton}>
             Iniciar Sesión
           </button>

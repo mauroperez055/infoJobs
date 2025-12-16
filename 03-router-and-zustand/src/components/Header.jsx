@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { Link } from "./Link";
 import { useAuthStore } from "../store/authStore";
 import { useFavoriteStore } from "../store/favoriteStore";
+import { HeaderUserButton } from "./HeaderUserButton";
 
 export function Header () {
   const { isLoggedIn } = useAuthStore();
@@ -9,14 +10,6 @@ export function Header () {
 
   const numberOfFavorites = countFavorites();
 
-  const HeaderUserButton = () => {
-    const { isLoggedIn, login, logout } = useAuthStore();
-
-    return isLoggedIn
-      ? <button onClick={logout} className="button-apply-job">Cerrar sesión</button>
-      : <button onClick={login} className="button-apply-job">Iniciar sesión</button>
-  }
-   
   return( 
       <header>
         <Link href="/" style={{ textDecoration: 'none'}}>
@@ -62,9 +55,9 @@ export function Header () {
           }
           
         </nav>
-        
-        <HeaderUserButton />
 
+        <HeaderUserButton />
+        
       </header>
 
   )
