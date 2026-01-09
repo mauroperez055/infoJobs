@@ -19,7 +19,7 @@ const { navigateTo } = useRouter();
   return(
     <main>
       <section>
-        <img src="./background.webp" width="200"/>
+        <img src="./background.webp" width="200" alt="Background image DevJobs"/>
 
         <h1>Encuentra el trabajo de tus sueños</h1>
 

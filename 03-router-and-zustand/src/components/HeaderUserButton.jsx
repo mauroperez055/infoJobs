@@ -15,7 +15,7 @@ export const HeaderUserButton = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/');
   }
 
   // Usuario logueado -> botón Cerrar Sesión

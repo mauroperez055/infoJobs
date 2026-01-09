@@ -49,7 +49,7 @@ export function Header () {
             isLoggedIn && (
               <NavLink className={({ isActive }) => isActive ? 'nav-link-active' : ''}
               to="/profile">
-                Profile ❤️ ({numberOfFavorites})
+                Perfil ❤️ ({numberOfFavorites})
               </NavLink>
             )
           }
@@ -57,7 +57,7 @@ export function Header () {
         </nav>
 
         <HeaderUserButton />
-        
+
       </header>
 
   )
