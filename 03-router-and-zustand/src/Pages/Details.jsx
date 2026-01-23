@@ -22,7 +22,7 @@ export default function JobDetails() {
 
   useEffect(() => {
     // simula una llamada a una API para obtener los detalles del trabajo
-    fetch(`https://jscamp-api.vercel.app/api/jobs/${id}`)
+    fetch(`http://localhost:1234/jobs/${id}`)
       .then(res => {
         // primero verifico si la respuesta es correcta
         if (!res.ok) throw new Error('Job not found');

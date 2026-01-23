@@ -16,18 +16,3 @@ export function JobListings({ jobs }) {
     </>
   );
 }
-
-
-/*import { JobCard } from "./JobCard";
-
-export function JobListings({ data }) {
-  return (
-    <>
-      <h2>Resultados de búsqueda</h2>
-      <div className="jobs-listings">
-        <JobCard data={data}/>
-      </div>
-    </>
-  );
-}
- */

@@ -1,0 +1,42 @@
+meta {
+  name: Actualizar un empleo completo
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:1234/jobs/5f92d0c2-eb91-4f68-bbeb-065d6155358d
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "titulo": "Desarrollador Full Stack Junior - Modificado",
+    "empresa": "StartApp",
+    "ubicacion": "Presencial - Córdoba",
+    "descripcion": "Buscamos un desarrollador Full Stack Junior con ganas de aprender y crecer en un entorno dinámico.",
+    "data": {
+      "technology": [
+        "javascript",
+        "react",
+        "node",
+        "mongodb"
+      ],
+      "modalidad": "presencial",
+      "nivel": "junior"
+    },
+    "content": {
+      "description": "StartApp incorpora un Desarrollador Full Stack Junior para sumarse a un equipo joven y en crecimiento. El puesto está orientado a personas que quieran desarrollarse profesionalmente trabajando en proyectos reales.",
+      "responsibilities": "- Colaborar en el desarrollo de funcionalidades frontend y backend.\n- Implementar mejoras y correcciones sobre aplicaciones existentes.\n- Aprender y aplicar buenas prácticas de desarrollo.\n- Trabajar junto a desarrolladores más experimentados.\n- Documentar el código desarrollado.",
+      "requirements": "- Conocimientos básicos de JavaScript.\n- Experiencia inicial con React y Node.js.\n- Conocimientos de bases de datos NoSQL.\n- Interés por aprender nuevas tecnologías.\n- Buenas habilidades de comunicación.",
+      "about": "StartApp es una startup tecnológica enfocada en el desarrollo de productos digitales innovadores. Ofrecemos un entorno de aprendizaje constante y oportunidades de crecimiento."
+    }
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

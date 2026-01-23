@@ -1,16 +1,15 @@
 meta {
-  name: Listar recursos
+  name: Listar empleos
   type: http
   seq: 1
 }
 
 get {
-  url: http://localhost:1234/users
+  url: http://localhost:1234/jobs
   body: none
   auth: inherit
 }
 
 settings {
   encodeUrl: true
-  timeout: 0
 }
