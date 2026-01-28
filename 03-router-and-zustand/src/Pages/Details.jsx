@@ -25,7 +25,7 @@ export default function JobDetails() {
     fetch(`http://localhost:1234/jobs/${id}`)
       .then(res => {
         // primero verifico si la respuesta es correcta
-        if (!res.ok) throw new Error('Job not found');
+        if (!res.ok) throw new Error('Job not found'); 
         return res.json();
       })
       .then(json => {

@@ -11,6 +11,13 @@ app.use(express.json());
 
 app.use('/jobs', jobsRouter);
 
-app.listen(PORT, () => {
-  console.log(`Servidor levantado en http://localhost:${PORT}`);
-})
+/**
+ * Por defecto process.env.NODE_ENV = undefined
+ */
+if (!process.env.NODE_ENV) {
+  app.listen(PORT, () => {
+    console.log(`Servidor levantado en http://localhost:${PORT}`);
+  })
+}
+
+export default app; 

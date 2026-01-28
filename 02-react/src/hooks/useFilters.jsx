@@ -60,7 +60,7 @@ export const useFilters = () => {
         setJobs(json.data); 
         setTotal(json.total); 
       } catch (error) {
-        console.log('Error fetching jobs:', error);
+        console.log('Error fetching jobs:', error); 
       } finally {
         setLoading(false);
       }

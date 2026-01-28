@@ -92,7 +92,7 @@ export class JobModel {
 
     return updatedJob;
   }
-
+ 
   static async delete(id) {
     const jobIndex = jobs.findIndex(job => job.id === id);
 
