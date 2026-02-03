@@ -27,7 +27,7 @@ export const HeaderUserButton = () => {
 
   // Usuario No logueado -> botón Iniciar Sesión
   return (
-    <button disabled={isLoginPage} onClick={handleLogin} className="button-apply-job">Iniciar sesión</button>
+    <button disabled={isLoginPage} onClick={handleLogin} className="button-apply-job">Ingresar</button>
   )
   
 };

@@ -36,7 +36,7 @@ const { navigateTo } = useRouter();
             <input 
               name="search"
               required 
-              type="text" 
+              type="text"
               placeholder="Buscar empleos por título, habilidad o empresa" 
             />
             
