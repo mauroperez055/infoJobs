@@ -26,13 +26,13 @@ function validateUpdate (req, res, next) {
   return res.status(400).json({ error: 'Invalid request', details: result.error.errors });
 }
 
-jobsRouter.get('/', JobController.getAll);
-jobsRouter.get('/:id', JobController.getId);
-
 // Primero validamos los datos del POST y luego creamos el job
 jobsRouter.post('/', validateCreate, JobController.create);
-jobsRouter.put('/:id', JobController.update);
 
 // Primero validamos los datos del PATCH y luego actualizamos el job
 jobsRouter.patch('/:id', validateUpdate, JobController.parcialUpdate);
+
+jobsRouter.get('/', JobController.getAll);
+jobsRouter.get('/:id', JobController.getId);
+jobsRouter.put('/:id', JobController.update);
 jobsRouter.delete('/:id', JobController.delete);
