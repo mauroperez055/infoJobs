@@ -34,7 +34,7 @@ if (typeof valorDesconocido === 'number') {
 // VOID - Funciones que no retornan nada
 // ================================
 
-function saludar(): void {
+function saludo(): void {
   console.log("Hola!")
 }
 
